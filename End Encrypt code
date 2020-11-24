@@ -1,0 +1,162 @@
+import random
+import sys
+
+global lower
+lower = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n'\
+        ,'o','p','q','r','s','t','u','v','w','x','y','z']
+global upper
+upper = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'\
+         ,'O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
+global start
+start = None
+
+global key
+key = ""
+
+def restarting():
+    global start
+    global restart
+    restart = input("Do you want to encrypt another message?(Yes/No) ")
+    restart.lower()
+    if restart == "yes":
+        start = True
+    elif restart == "no":
+        print("Exiting...")
+        start = False
+    elif restart == "0":
+        confirm = input("Are you sure you want to exit?(Yes/No) ")
+        confirm.lower()
+        if confirm == 'yes':
+            print("Exiting the program...")
+            sys.exit()
+        elif confirm == "no":
+            restart = input("Do you want to encrypt another message?(Yes/No) ")
+            if restart == "yes":
+                start = True
+            elif restart == "no":
+                print("Exiting...")
+                start = False
+            else:
+                while not(restart == "yes") and restart != 'no':
+                    print("Invalid answer \nPlease write Yes or No")
+                    restart = input("Do you want to encrypt another message?(Yes/No) ")
+        else:
+            print("Invalid input \nPlease enter Yes or No")
+            confirm = input("Are you sure you want to exit?(Yes/No) ")
+            
+    else:
+        while not(restart == 'yes') and not(restart == 'no'):
+            print("Invalid input")
+            restart = input("Do you want to encrypt another message?(Yes/No) ")
+            if restart == "yes":
+                start = True
+            elif restart == "no":
+                print("Exiting...")
+                start = False
+
+def key_funct():
+    global key
+    key = input("What is your key: (For random key, click enter)")
+    while key == "0":
+        confirm = input("Are you sure you want to exit?(Yes/No) ")
+        confirm.lower()
+        if confirm == 'yes':
+            print("Exiting the program...")
+            sys.exit()
+        elif confirm == 'no':
+            print("Continuing with the program...")
+            key = input("What is your key: (For random key, click enter)")
+        else:
+            print("Invalid input \nPlease enter Yes or No")
+            confirm = input("Are you sure you want to exit?(Yes/No) ")
+    
+    if type(key) == str:
+        if len(key) == 0:
+            key = random.randint(1, 25)
+        else: 
+            if "*" in key or "/" in key or "+" in key or "-" in key or "(" in key or ")" in key:
+                key = str(eval(key))
+            while ("." in key) == True:
+                print("Invalid key \nKey should not be a float")
+                key = input("What is your key: (For random key, click enter)")
+            while key.isdigit() == False and len(key) != 0:
+                if key[1:].isdigit() == True and key[0] == "-":
+                    break
+                print("Invalid key \nKey is not a number")
+                key = input("What is your key: (For random key, click enter)")
+            while key.isspace() == True:
+                print("Key is empty")
+                key = input("What is your key: (For random key, click enter)")
+
+
+def my_encrypt():
+    global lower
+    global upper
+    global start
+    global key
+    
+    confirm = ""
+    print("To exit the program, enter 0 at any point")
+    start = None
+    while start == True or start == None:
+        if start == None or start == True:
+            msg = input("What is your message? ")
+        while len(msg) == 0 or msg.isspace() == True:
+            print("Message is empty")
+            msg = input("Please enter your message: ")
+        while msg == "0":
+            confirm = input("Are you sure you want to exit?(Yes/No) ")
+            confirm.lower()
+            if confirm == 'yes':
+                print("Exiting the program...")
+                sys.exit()
+            elif confirm == "no":
+                print("Continuing with the program...")
+                msg = input("Please enter your message: ")
+            else:
+                print("Invalid input \nPlease enter Yes or No")
+                confirm = input("Are you sure you want to exit?(Yes/No) ")
+        
+        key_funct()
+        
+        key = int(key)%26
+        
+        while key == 0:
+            print("Message has not changed")
+            key_0 = (input("Would you like to select another key? (Y/N) ")).lower()
+            if key_0 == "y":
+                key_funct()
+            elif key_0 == "n":
+                print("I apologise but I am not advanced enough to handle this situation.")
+                print("Exiting...")
+                sys.exit()
+            while key_0 != "y" and not(key_0 == "n"):
+                print("Invalid input")
+                key_0 = (input("Would you like to select another key? (Y/N) ")).lower()
+                if key_0 == "y":
+                    key_funct()
+                elif key_0 == "n":
+                    print("I apologise but I am not advanced enough to handle this situation.")
+                    print("Exiting...")
+                    sys.exit()
+        
+        result = ""
+        msg = msg.strip()
+        for i in range(len(msg)):
+            if msg[i] == " ":
+                result += " "
+            elif msg[i].isalpha() != True:
+                result += msg[i]
+            else:
+                for a in range(len(lower)):
+                    if msg[i] == lower[a]:
+                        y = i + 1
+                        result += lower[(a + (y*int(key))) % 26]
+                    elif msg[i] == upper[a]:
+                        y = i + 1
+                        result += upper[(a + (y*int(key))) % 26]
+        print("Your encrypted message:", result)
+        restarting()
+
+my_encrypt()
