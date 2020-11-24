@@ -1,3 +1,24 @@
+# Encryption:
+# • rand key(lst of poss msg),
+# • program able to restart, 
+# • exit code, 
+# • -ve key 
+
+
+print("The encryption is addition of certain number that changes with \n\
+every letter the key would be set by user but it is multipled by its \n\
+index + 1")
+print("Eg: key = 1, msg is \"hi\"")
+print("    The 1st letter \"h\" will bcome \"i\", and the program will \n\
+    shift 1 letter forward. The 2nd letter \"i\" will bcome \"k\", and \n\
+    the program will shift 2 * 1 letters forward. \n\
+    The encrypted msg will be \"ik\"")
+
+print("")
+print("The developer hopes you enjoy using the program. \
+Now, let's begin!")
+print("")
+
 import random
 import sys
 
@@ -73,8 +94,9 @@ def key_funct():
     
     if type(key) == str:
         if len(key) == 0:
-            key = random.randint(1, 25)
+            key = random.randint(1, 25) #For the random key
         else: 
+            #If the key is an eqn:
             if "*" in key or "/" in key or "+" in key or "-" in key or "(" in key or ")" in key:
                 key = str(eval(key))
             while ("." in key) == True:
@@ -97,7 +119,8 @@ def my_encrypt():
     global key
     
     confirm = ""
-    print("To exit the program, enter 0 at any point")
+    print("To exit the code at any time, enter \'0\' in the input and \
+then \nenter Y/y/yes when asking for confirmation.")
     start = None
     while start == True or start == None:
         if start == None or start == True:
