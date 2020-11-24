@@ -1,3 +1,10 @@
+# Decryption:
+# • rand key(lst of poss msg), 
+# • -ve key, 
+# • exit code, 
+# • program able to restart
+# • program should be able to handle eqn
+
 import random
 import sys
 
@@ -17,7 +24,7 @@ key = ""
 def key_funct():
     global key
     key = input("What is your key? (If key is not known, click enter)")
-    while key == "0":
+    while key == "0": #Double checking that the exit code was not entered by mistake 
         confirm = input("Are you sure you want to exit?(Yes/No) ")
         confirm.lower()
         if confirm == 'yes':
@@ -31,8 +38,10 @@ def key_funct():
             confirm = input("Are you sure you want to exit?(Yes/No) ")
     
     if type(key) == str:
+        #If the key is an eqn:
         if "*" in key or "/" in key or "+" in key or "-" in key or "(" in key or ")" in key:
             key = str(eval(key))
+       #Format check of key
         while ("." in key) == True:
             print("Invalid key \nKey should not be a float")
             key = input("What is your key? (If key is not known, click enter)")
@@ -54,7 +63,8 @@ def my_decrypt():
     global key
     
     confirm = ""
-    print("To exit the program, enter 0 at any point")
+    print("To exit the code at any time, enter \'0\' in the input and \
+then \nenter Y/y/yes when asking for confirmation.")
     
     msg = input("Please enter your encrypted message: ")
     
@@ -63,15 +73,15 @@ def my_decrypt():
         if start == True:
             msg = input("Please enter your encrypted message: ")
         
-        while type(msg) != str:
+        while type(msg) != str: #This is more of an in case anything was changed by accident
             print("Input error, message is not a string")
             msg = input("Please enter your encrypted message: ")
+        #Format check of the message: 
         while len(msg) == 0 or msg.isspace() == True:
             print("Message is empty")
             msg = input("Please enter your encrypted message: ")
-        while msg == "0":
-            confirm = input("Are you sure you want to exit?(Yes/No) ")
-            confirm = confirm.lower()
+        while msg == "0": #Double checking that the exit code was not entered by mistake 
+            confirm = input("Are you sure you want to exit?(Yes/No) ").lower()
             if confirm == 'yes':
                 print("Exiting the program...")
                 sys.exit()
@@ -129,22 +139,20 @@ def my_decrypt():
                     print("{}.".format(i+1), possible_msg[i])
         print("")
         
-        restart = input("Do you want to decrypt another message?(Yes/No) ")
-        restart = restart.lower()
+        restart = input("Do you want to decrypt another message?(Yes/No) ").lower()
         
         if restart == "yes":
             start = True
         elif restart == "no":
             print("Exiting...")
             start = False
-        elif restart == "0":
-            confirm = input("Are you sure you want to exit?(Yes/No) ")
-            confirm = confirm.lower()
+        elif restart == "0": #Double checking that the exit code was not entered by mistake 
+            confirm = input("Are you sure you want to exit?(Yes/No) ").lower()
             if confirm == 'yes':
                 print("Exiting the program...")
                 sys.exit()
             elif confirm == "no":
-                restart = input("Do you want to decrypt another message?(Yes/No) ")
+                restart = input("Do you want to decrypt another message?(Yes/No) ").lower()
                 if restart == "yes":
                     start = True
                 elif restart == "no":
@@ -156,12 +164,12 @@ def my_decrypt():
                         restart = input("Do you want to decrypt another message?(Yes/No) ")
             else:
                 print("Invalid input \nPlease enter Yes or No")
-                confirm = input("Are you sure you want to exit?(Yes/No) ")
+                confirm = input("Are you sure you want to exit?(Yes/No) ").lower()
                 
         else:
             while not(restart == 'yes') and not(restart == 'no'):
                 print("Invalid input")
-                restart = input("Do you want to decrypt another message?(Yes/No) ")
+                restart = input("Do you want to decrypt another message?(Yes/No) ").lower()
                 if restart == "yes":
                     start = True
                 elif restart == "no":
