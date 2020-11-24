@@ -1,0 +1,76 @@
+def my_decrypt(msg):
+    lower = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n'\
+                ,'o','p','q','r','s','t','u','v','w','x','y','z']
+    upper = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N'\
+             ,'O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    
+    while len(msg) == 0 or msg.isspace() == True:
+        print("Message is empty")
+        msg = input("Please enter your message: ")
+        
+    key = input("What is your key? (If key is not known, click enter) ")
+    #Format checking
+    while ("." in key) == True:
+        print("Invalid key \nKey should not be a float")
+        key = input("What is your key? ")
+    if len(key) > 1:
+        if key[0] == "-":
+            while key[1:].isdigit() == False and len(key) != 0:
+                print("Invalid key \nKey is not a number")
+                key = input("What is your key? ")
+                while ("." in key) == True:
+                    print("Invalid key \nKey should not be a float")
+                    key = input("What is your key? ")
+    else:
+        while key.isdigit() == False and len(key) != 0:
+            print("Invalid key \nKey is not a number")
+            key = input("What is your key? ")
+            while ("." in key) == True:
+                print("Invalid key, key should not be a float")
+                key = input("What is your key? ")
+    while key.isspace() == True:
+        print("Key is empty")
+        key = input("What is your key? ")
+    
+    possible_msg = []
+    if len(key) != 0: 
+        key = int(key) % 26 #to ensure the key < 26
+        result = ""
+        for i in range(len(msg)):
+            if msg[i] == " ": #if the character is a space 
+                result += " " #just put it in 
+            elif msg[i].isalpha() != True: #if character is a symbol
+                result += msg[i] #just put it in 
+            else:
+                for a in range(len(lower)):
+                    index = i + 1 
+                    if msg[i] == lower[a]:
+                        result += lower[lower.index(msg[i])-(index*key)]
+                    if msg[i] == upper[a]:
+                        result += upper[upper.index(msg[i])-(index*key)]
+        print("Your decrypted message:", result)
+    
+    elif len(key) == 0: #If the key is unknown 
+        for x in range(1, 26):
+            possible_msg.append("")
+            decoded = ""
+            for i in range(len(msg)):
+                if msg[i] == " ":
+                    decoded += " "
+                elif msg[i].isalpha() != True:
+                    decoded += msg[i]
+                else:
+                    for a in range(len(lower)):
+                        index = i + 1 
+                        if msg[i] == lower[a]:
+                            decoded += lower[(lower.index(msg[i])- index*x) % 26]
+                        if msg[i] == upper[a]:
+                            decoded += upper[(upper.index(msg[i])- index*x) % 26]
+            possible_msg[x-1] += decoded
+
+        print("List of possible messages: ")
+        for i in range(len(possible_msg)):
+            if (i + 1) < 10:
+                print("{}. ".format(i+1), possible_msg[i])
+            else:
+                print("{}.".format(i+1), possible_msg[i])
