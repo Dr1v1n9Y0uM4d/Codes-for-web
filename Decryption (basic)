@@ -1,0 +1,68 @@
+# Still a work in progress, but the code below should decrypt the ciphertext okay and work smoothly (I hope)
+
+print("Welcome! ") 
+intro = input("Do you need an intro to the A1Z26 cipher? (y/n) ").lower()
+#while intro.isalpha() != True: #to add fornat check later 
+ #   print()
+    
+if intro == "y" or intro == "yes":
+    print("The A1Z26 is a very simple direct substitution cipher, \n\
+where its number in the alphabet replaces each alphabet letter. \n\
+Here all letters are set to lowercase, the English alphabet is \n\
+used, and all non-alphabet symbols are not transformed. ")
+
+
+print("Take note, rules to rmbr when entering decrypted messages: \n\
+1. Use \'-\' to separate letters in a word. (and try not to use it \
+in your messages, your hyphenated word will become a single word) \n\
+2. Use \' \' to separate words as you would (normally). \n\
+3. Symbols will not be changed. \n\
+(it is a cipher that replaces the letter with numbers) \n\
+eg: \'23-8-15 1-18-5 25-15-21?\' will be decrypted to \'Who are you?\'")
+print()
+print("To exit the code at any time, enter \'0\' in the input and \
+then enter Y/y/yes when asking for confirmation.")
+print()
+print("The developer hopes you enjoy using the program. \
+Now, let's begin!")
+
+
+def decrypt():
+    num_lst = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', \
+               '11', '12', '13', '14', '15', '16', '17', '18', '19', \
+               '20', '21', '22', '23', '24', '25', '26']
+    
+    msg = input("What is your msg to be decrypted? ")
+    
+    msg_lst = msg.split(" ")#This splits the msg into 1 word by 1 word
+    
+    result = ""
+    for i in range(len(msg_lst)):
+        msg_str = msg_lst[i].split("-") #This splits the current word into its letters
+        for a in range(len(msg_str)):
+            if msg_str[a].isdigit() == False:
+                lst = []
+                for b in msg_str[a]: #To get list of word containing symbol
+                    lst += [b]
+                string = ""
+                msg_sym = ""
+                char  = ""
+                for d in range(len(lst)):
+                    if lst[d] in num_lst:
+                        char += lst[d]
+                    if lst[d] not in num_lst: 
+                        result += chr(int(char) + 96)
+                        char = ""
+                        result += lst[d]
+                    if d == len(lst)-1 and char != "":
+                        result += chr(int(char) + 96)
+                        
+            else:
+                result += chr(int(msg_str[a]) + 96)
+        result += " "
+    
+    print("")
+    print("Your decrypted message is:", result.strip())
+    
+
+decrypt()
