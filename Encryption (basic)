@@ -1,4 +1,4 @@
-# Still a work in progress, but the code below functions well (I hope) and does the basic encryption
+# Still a work in progress, but the code below encrypts your msg okay (I hope) and should function
 
 print("Take note, stuff to rmbr when entering messages: \n\
 1. Symbols (besides numbers) will not be changed (and may be used \
