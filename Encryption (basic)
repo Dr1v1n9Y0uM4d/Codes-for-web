@@ -1,3 +1,18 @@
+# The encryption is addition of certain no. that chng w/ every letter
+# the key would be set by user but it is multipled by its index + 1
+# eg: key = 1, msg is "hi"
+# the 1st letter "h" will bcome "i", and the program will shift 1 letter
+# forward
+# the 2nd letter "i" will bcome "k", and the program will shift 2 * 1 
+# letters forward
+# the encrypted msg: "ik"
+
+# Encryption:
+# • rand key(lst of poss msg),
+# • program able to restart, 
+# • exit code, 
+# • -ve key 
+
 def my_encrypt():
     # To get the message to be encrypted:
     msg = input("What is your message? ") 
