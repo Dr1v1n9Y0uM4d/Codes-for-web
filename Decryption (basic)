@@ -1,3 +1,12 @@
+# Decryption features:
+# • rand key(lst of poss msg), 
+# • -ve key, 
+# • exit code, 
+# • program able to restart
+# • program should be able to handle eqn
+
+# Since you are using my version of the decrypt, I assume have visited my encryption code and thus you know how this works so I won't explain it. 
+
 def my_decrypt(msg):
     lower = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n'\
                 ,'o','p','q','r','s','t','u','v','w','x','y','z']
