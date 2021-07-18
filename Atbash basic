@@ -1,0 +1,34 @@
+lower = 'abcdefghijklmnopqrstuvwxyz'
+upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+# Don't worry abt encryption and decryption, e & d are identical for the Atbash cipher.
+
+def atbash():
+    txt = input('Enter your message to be encrypted: ')
+    e_or_d = input("Are you encrypting or decrypting? (e/d) ").lower()
+    
+    while e_or_d != 'e' and e_or_d != 'd':
+        e_or_d = e_or_d = input("Are you encrypting or decrypting? (e/d) ").lower()
+    
+    if e_or_d == 'e' or  e_or_d == '':
+        e_or_d = 'encrypted'
+    elif e_or_d == 'd':
+        e_or_d  = 'decrypted'
+    
+    print()
+    
+    output = ''
+    for i in range(len(txt)):
+        if txt[i] in lower:
+            output += lower[25 - lower.index(txt[i])]
+        elif txt[i] in upper:
+            output += upper[25 - upper.index(txt[i])]
+        else:
+            output += txt[i]
+    
+    print("Your {} message is: {}".format(e_or_d, output))
+    print()
+
+print("The word 'atbash' derives from the the first and last 2 letters of the Hebrew alphabet. ")
+print()
+atbash()
