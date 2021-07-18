@@ -1,0 +1,33 @@
+number = int(input("Num: "))
+binary = ""
+count = 0
+place = 0
+
+ext = None
+while ext != True:
+    if 2**count > number:
+        place = count
+        ext = True
+    count += 1
+
+done = None
+
+while done != True:
+    for i in range(place+1):
+        if 2**(place - i) <= number:
+            if (place - i+1) % 4 == 0:
+                binary += " 1"
+            else: 
+                binary += "1" 
+            number -= 2**(place - i)
+        else:
+            if (place - i+1) % 4 == 0:
+                binary += " 0"
+            else: 
+                binary += "0" 
+        
+        if number == 0:
+            binary = binary.strip()
+            done = True
+
+print(binary)
