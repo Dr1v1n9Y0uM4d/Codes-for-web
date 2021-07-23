@@ -1,5 +1,5 @@
 # This is the base of my code, it just converts denary (normal num/base-10 num) to hexadecimal (abnormal num, nah just kidding, its a base-16 num)
-
+# This one is output as string 
 
 hexa_lst = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
             'A','B','C','D','E','F']
@@ -8,6 +8,7 @@ hexa = ''
 number = input('Enter your number: ') #this assumes the user/you enters a positive integer (whole numbers) 
 # word of warning, if you enter a negative num, I am not responsible for what occurs
 # Please dont try to test this code, it's a basic code. The poor program wouldn't know what to do
+
 temp_num = num = int(number)
 
 count = 0 # len of hex
