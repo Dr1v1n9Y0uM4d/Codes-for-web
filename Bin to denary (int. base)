@@ -1,0 +1,8 @@
+binary = input("Enter binary: ")
+denary = 0
+
+for i in range(len(binary)):
+    if binary[i] == "1":
+        denary += 2**(len(binary)-i-1)
+
+print(denary)
