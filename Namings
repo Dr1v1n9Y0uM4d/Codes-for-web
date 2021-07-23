@@ -1,0 +1,6 @@
+# Typically I would indicate how the output is given eg (string) or (list)
+# But sometimes I'd get lazy and just write (s) or (l) 
+# So don't be shocked if that happens
+# And before you start booing, it sometimes is to make space for additional comments of sorts 
+# (in the sense that the name wouldn't be too long)
+# eg: (s, end) - this would be how my code that have features are named 
