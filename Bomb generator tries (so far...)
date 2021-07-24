@@ -1,0 +1,111 @@
+#this one below is actually the 2nd ver but I overwrote the 1st w the 3rd so yeah.....
+import random
+
+grid = '■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ '
+temp_grid = str(grid)
+bombs = 3
+
+board = user_board = grid#list(rows)
+
+bomb_locat = []
+
+for i in range(bombs):
+    locat = 2 * random.randint(1, len(grid)/2)
+    '''temp_grid = grid[:locat-2]
+    temp_grid += 'X '
+    temp_grid += grid[locat:]
+    grid = str(temp_grid)'''
+    bomb_locat += [locat]
+print(bomb_locat)
+#print(grid)
+
+# to get row: num//5 + 1
+# to get col: num%5
+#test thoery in a way (board that contains bomb)
+
+for i in range(bombs):
+    b_row = str(int(bomb_locat[i]) // 5)
+    #chr(65 + (int(bomb_locat[i]/2) // 5))
+    b_col = chr(65 + (int(bomb_locat[i]) % 5))
+    #str(int(bomb_locat[i]/2) % 5)
+    print(b_col + b_row)
+    temp_grid = grid[:bomb_locat[i]-2]
+    temp_grid += 'X '
+    temp_grid += grid[bomb_locat[i]:]
+    grid = str(temp_grid)
+
+print(grid)
+
+
+
+
+
+import random
+
+grid = '■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ '
+temp_grid = str(grid)
+bombs = 3
+
+board = user_board = grid#list(rows)
+
+bomb_locat = []
+
+for i in range(bombs):
+    locat = 2 * random.randint(1, len(grid)/2)
+    #need to check, make sure not same:
+    while locat in bomb_locat:
+        locat = 2 * random.randint(1, len(grid)/2)
+    bomb_locat += [locat]
+   
+#print(bomb_locat)
+
+# to get row: num//5 + 1
+# to get col: num%5
+#test thoery in a way (board that contains bomb)
+for i in range(bombs):
+    b_col = str(int(bomb_locat[i]/2-1) % 5 + 1)
+    #str(int(bomb_locat[i]/2) % 5)
+    #chr(65 + (int(bomb_locat[i]/2-1) % 5)) 
+    
+    b_row = chr(65 + (int(bomb_locat[i]/2-1) // 5))
+    #chr(65 + (int(bomb_locat[i]/2) // 5))
+    #str(int(bomb_locat[i]/2-1) // 5 + 1)
+    
+    coordinates = b_col + b_row
+    
+    print(b_row + b_col)
+    bomb_locat += [coordinates]
+    
+    temp_grid = grid[:bomb_locat[i]-2]
+    temp_grid += 'X '
+    temp_grid += grid[bomb_locat[i]:]
+    grid = str(temp_grid)
+
+print(grid)
+print()
+
+#this was more to test if my coord was right
+row1 = '   ' #for the top hori header w letters
+for i in range(5): #grid_w):
+    row1 += str(i + 1) + ' '
+print(row1)
+
+idx = 0 
+for i in range(5):
+    row = ' ' + chr(65 + i) + ' '
+    row += grid[idx: idx + 2*5]
+    print(row)
+    idx += 2*5
+
+print()
+#now to try to cr8 the numbers...
+for i in range(bombs):
+    for j in range(9):
+    #used a set number because thats max num o boxes ard a bomb
+        
+
+
+
+
+
+
