@@ -1,0 +1,118 @@
+Okay so this is a trial for how I should write/input the other future files. 
+So it's gonna be messy and prob v long as I try to fig out how much I want to include (so far it's gonna b everything)
+A lot of the stuff I comments is hard to rmb what they were (for), some is stuff I may need in future , some is prev ver of that part 
+(so I can look back and rmb what doenst work)
+
+
+grid_w = 5 #input('What is your grid side len? ')
+grid_l = 5
+bombs = 3
+
+#def grid():
+row1 = '   '
+for i in range(grid_w):
+    row1 += chr(65 + i) + ' '
+
+print(row1)
+
+global rows 
+rows = []
+for i in range(grid_l):
+    row = ''
+    row += ' ' + str(i+1) + ' '
+    for j in range(grid_w):
+        row += 'O '
+    rows += [row]
+
+for i in range(grid_l):
+    print(rows[i])
+
+board = user_board = list(rows)
+
+bomb_locat = []
+
+# X - chosen bomb
+# x - user selection spot - when checking? 
+
+
+
+#restarted to use simpler borad, using the board as str
+grid_w = 5 #input('What is your grid side len? ')
+grid_l = 5
+bombs = 3
+
+global grid
+grid = ''
+for i in range(grid_w*grid_l):
+    grid += 'O '
+
+print(grid, len(grid))
+
+#def grid():
+row1 = '   ' #for the top hori header w letters
+for i in range(grid_w):
+    row1 += chr(65 + i) + ' '
+
+print()
+print(row1)
+
+#global rows 
+rows = []
+idx = 0
+for i in range(grid_l):
+    row = ''
+    row += ' ' + str(i+1) + ' ' #for the vert num header
+    row += grid[idx:idx+2*grid_w]
+    idx += 2*grid_w
+    rows += [row]
+
+for i in range(grid_l): 
+    print(rows[i])
+
+board = user_board = list(rows)
+
+bomb_locat = []
+
+
+
+#then in the end I edited(bc I think this is long enouhg for juts abt the grid) and settled on(at least for now):
+grid_w = 5 #input('What is your grid width? ')
+grid_l = 5 #input('What is your grid len? ')
+bombs = 3 #input('Number of bombs? ')
+#need to check for int i/p later
+#oh and prob need to cr8 random generator
+# - diff lvls? 
+
+global grid
+grid = ''
+for i in range(grid_w*grid_l):
+    grid += '■ '
+
+print(grid, len(grid))
+
+
+#def grid():
+row1 = '   ' #for the top hori header w letters
+for i in range(grid_w):
+    row1 += str(i + 1) + ' '
+
+print()
+print(row1)
+
+#global rows 
+rows = []
+idx = 0
+for i in range(grid_l):
+    row = ''
+    row += ' ' + chr(65 + i) + ' ' #for the vert num header
+    row += grid[idx:idx+2*grid_w]
+    idx += 2*grid_w
+    rows += [row]
+
+for i in range(grid_l): 
+    print(rows[i])
+
+board = user_board = list(rows)
+
+bomb_locat = []
+
