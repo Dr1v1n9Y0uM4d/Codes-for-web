@@ -105,7 +105,164 @@ for i in range(bombs):
         
 
 
+okay so I made some (minor) changes to my code b4 continuing w the code
+import random
+
+grid = '■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ '
+temp_grid = str(grid)
+bombs = 3
+
+board = user_board = grid#list(rows)
+
+bomb_locat = []
+
+for i in range(bombs):
+    locat = 2 * random.randint(1, len(grid)/2)
+    #need to check, make sure not same:
+    while locat in bomb_locat:
+        locat = 2 * random.randint(1, len(grid)/2)
+    bomb_locat += [locat]
+   
+#print(bomb_locat)
+
+# to get row: num//5 + 1
+# to get col: num%5
+#test thoery in a way (board that contains bomb)
+for i in range(bombs):
+    # Num:
+    b_col = str(int(bomb_locat[i]/2-1) % 5 + 1)
+    # Breaking down what I did:
+    # bomb_locat[i]/2-1 → gets 1 less than the place
+    # So that when I %(for remainder), 
+    # I can just add 1 for its actual place
+    # Eg1: If the place was 1, locat would have been stored as 2.
+    #      So taking 2/2(1) then -1(0). When it's %(remainder)
+    #      there's obv no remainder thus 0. Then the +1 will get
+    #      me its place of 1 (it was an honest accident, in the
+    #      sense that I was just trying stuff out & this was a 
+    #      happy accident/coincidence)
+    # Eg2: If the place was 5, locat would have been stored as 10.
+    #      So taking 10/2(5) then -1(4). When it's %(remainder)
+    #      I'd get 4. Then the +1 will give me its place of 5.
+    #      #
+    #str(int(bomb_locat[i]/2) % 5)
+    #chr(65 + (int(bomb_locat[i]/2-1) % 5)) 
+    
+    # Letters:
+    b_row = chr(65 + (int(bomb_locat[i]/2-1) // 5))
+    # Breaking down what I did:
+    # bomb_locat[i]/2-1 → gets 1 less than the place
+    # So that when I //(for quotient), I'd get its row
+    # Eg1: If (int(bomb_locat[i]/2-1) // 5) < 5, obv I'd get 0
+    #      bc anyth <5 won't have a quotient >0. Thus, it'd
+    #      be chr(65) (= 'A')
+    #      #
+    #chr(65 + (int(bomb_locat[i]/2) // 5))
+    #str(int(bomb_locat[i]/2-1) // 5 + 1)
+    
+    coordinates = b_row + b_col
+    
+    print(b_row + b_col)
+    bomb_locat += [coordinates]
+    
+    temp_grid = grid[:bomb_locat[i]-2]
+    temp_grid += 'X '
+    temp_grid += grid[bomb_locat[i]:]
+    grid = str(temp_grid)
+
+#print(grid)
+print()
+
+#this was more to test if my coord was right
+row1 = '   ' #for the top hori header w letters
+for i in range(5): #grid_w):
+    row1 += str(i + 1) + ' '
+print(row1)
+
+idx = 0 
+for i in range(5):
+    row = ' ' + chr(65 + i) + ' '
+    row += grid[idx: idx + 2*5]
+    print(row)
+    idx += 2*5
+
+print()
+
+#now to try to cr8 the numbers...
+idx = 0 
+for i in range(bombs):
+    # I'll work on if it's in corner → side → middle
+    if 
+    
+    
+    
+    
+    #for j in range(9):
+    #used a set number because thats max num o boxes ard a bomb
 
 
 
+changed stuff agn and made errors, gonna add from the part changed I guess
+
+#now to try to cr8 the numbers...
+idx = 0 
+for i in range(bombs):
+    # I'll work on if it's in corner → side → middle
+    if int(bomb_locat[i]/2-1) % 5 + 1  == 5:
+    #yes the double space was intentional
+        if bomb_locat[i-2].isdigit() == True: #checking W
+            bomb_locat[i-2] += 1
+        else:
+            bomb_locat[i-2] = 1
+        
+        '''N = -6 ''' #index o N rows, it'll be 6 → 5 → 4 posn behind
+        # to be fair, that more so I dont confuse myself. 
+        # but you can actually use the same number but chng the
+        # sign for the checking o N
+        '''S = +4 ''' #index o S rows, it'll be 4 → 5 → 6 posn forward
+        
+        #Alt
+        N_S = 4
+        for j in range(3):
+            '''
+            if bomb_locat[i+N].isdigit() == True: #checking S
+                bomb_locat[i+N] += 1
+            else:
+                bomb_locat[i+N] = 1
+            N += 1
+            
+            if bomb_locat[i+S].isdigit() == True: #checking S
+                bomb_locat[i+S] += 1
+            else:
+                bomb_locat[i+S] = 1
+            S += 1
+            '''
+            
+            if bomb_locat[i-N_S].isdigit() == True: #checking N
+                bomb_locat[i-N_S] += 1
+            else:
+                bomb_locat[i-N_S] = 1
+            
+            if bomb_locat[i+N_S].isdigit() == True: #checking S
+                bomb_locat[i+N_S] += 1
+            else:
+                bomb_locat[i+N_S] = 1
+            
+            N_S += 1
+        
+        if bomb_locat[i+4].isdigit() == True: #checking SW
+            bomb_locat[i+4] += 1
+        else:
+            bomb_locat[i+4] = 1
+        
+        #hm...wonder if I could make a loop, at least for N&S/E&W rows
+        #yeah I'd prob could make a loop for the N&S rows more easily
+        if bomb_locat[i+5].isdigit() == True:
+            bomb_locat[i+5] += 1
+        else:
+            bomb_locat[i+5] = 1
+        
+        # aft I was done w the above so far, I realised I shouldnt be
+        # using bomb_locat...*sigh*
+        
 
