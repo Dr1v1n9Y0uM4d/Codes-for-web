@@ -1,0 +1,59 @@
+binary = input("What is your binary string? ")
+
+#...okay i got a little lazy so i wont be doing checks
+# the ones below was so my code could work
+# its only progrmmaed to work for binary w no spaces & 
+
+b = '' #temp holder if binary needs to chng
+if ' ' in binary: #rm ' ' that may or may not be added
+    for k in range(len(binary)):#//4):
+        if binary[k].isspace() == False:
+            b += binary[k]
+    binary = str(b)
+
+#len check, should be multiple of 4, else add 0 in front
+while len(binary) % 4 != 0:
+    binary = '0' + binary
+
+
+hexa_lst = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
+            'A', 'B', 'C', 'D', 'E', 'F']
+hexa = ""
+
+count = 0 #counts which set of 4 bits
+
+for i in range(len(binary)//4):
+    idx = count*4 #idx - index of bit in next set
+    
+    num = 0 #will contain denary num of that set of 4 bits
+    #to get the denary number of set of 4 bits:
+    for j in range(4):
+        if binary[count*4 + j] == '1':
+            num += 2**(3-j)
+    
+    hexa += hexa_lst[num]
+    count += 1
+
+#hex formatting
+h = ''
+if len(hexa) > 2:
+    idx = len(hexa)
+    if len(hexa) % 2 == 1:
+        for m in range(len(hexa)//2 + 1):
+            if idx-2 < 0:
+                idxa = 0
+            else:
+                idxa = idx - 2
+            h = ' ' + hexa[idxa:idx] + h
+            idx -= 2
+    else:
+        for m in range(len(hexa)//2):
+            h = ' ' + hexa[idx-2:idx] + h
+            idx -= 2
+            
+    hexa = h.strip()
+
+if hexa[:2].isalnum() == False:
+    hexa = '0' + hexa
+
+print('Your hexadecimal number is', hexa)
