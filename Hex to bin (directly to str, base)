@@ -1,0 +1,48 @@
+# String version
+# in the sense that i directly converted the hex to binary (which is
+# formatted as a string)
+#start: 29 aug 2021
+#end: 29 aug (the base code at least, who knows if ill come back to this)
+
+hexa_lst = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
+            'A', 'B', 'C', 'D', 'E', 'F']
+
+
+binary = ''
+hexa = input('What is your hexa? ')
+
+# FORMAT check: 
+# honestly not rly needed but i guess it might be btr for the prgm to 
+# handle less data. Plus the code juts below removes anything thats 
+# not a num or letter from eng alphabet but uty if youd remove it but 
+# its best to hvae the below code 
+for j in range(hexa):
+    if hexa[j].isalnum() == True:
+        h += hexa[j]
+
+
+for i in range(len(hexa)):
+    num = hexa_lst.index(hexa[i])
+    print(num)
+    idx = 3 #not 4 because the indices for 2 strat from 2**0 -> 1
+    
+    temp = int(num)
+    while idx >= 0:
+        if temp >= 2**idx:
+            binary += '1'
+            temp -= 2**idx
+        else:
+            binary += '0'
+        
+        idx -= 1
+        
+    binary += ' ' #because im kinda lazy to keep needing to write the 
+    # code to add spaces at the end. I mean if its so easy might as 
+    # well add it right? unless youre a weird person or wants to not 
+    # hvae someone tranlaste the long binary string youre abt to give 
+    # them, you can just omit this line or remove the spaces b4 giving 
+    # the binary to your victim
+
+binary = binary.strip()
+
+print(binary)
