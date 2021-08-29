@@ -1,0 +1,53 @@
+# LIST VERSION
+#(might be unnecessary but i prefer to work w lst)
+# itd get converted back to str for output but to convert the hex
+
+#start: 29 aug
+#end: 29 aug (well the base code minimally)
+
+hexa_lst = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', \
+            'A', 'B', 'C', 'D', 'E', 'F']
+
+
+binary = []
+hexa = input('What is your hexa? ')
+
+# FORMAT check: 
+# honestly not rly needed but i guess it might be btr for the prgm to 
+# handle less data. Plus the code juts below removes anything thats 
+# not a num or letter from eng alphabet but uty if youd remove it but 
+# its best to hvae the below code 
+for a in range(hexa):
+    if hexa[a].isalnum() == True:
+        h += hexa[a]
+
+for i in range(len(hexa)):
+    num = hexa_lst.index(hexa[i])
+    idx = 3
+    # the greatest idx was alr set which is 3 because in 1 binary set
+    # it has a max of 4 bits 
+    
+    temp = int(num)
+    # the typecast is so that temp wont hvae same memory addr as num
+    # because if one was chnaged, other also will chnage
+    
+    while idx >= 0:
+        place = 2**idx # place refers literally to the binary places
+                       # /powers of 2 but just their index
+        if temp >= place:
+            binary += ['1'] 
+            temp -= 2**idx
+        else:
+            binary += ['0']
+        idx -= 1
+
+b = ''
+idx = 0
+for j in range(len(binary)//4):
+    for k in range(4):
+        b += binary[idx+k]
+    b += ' ' #to add the spacing in btw 4 bits
+    idx += 4
+    
+binary = str(b)
+print(binary)
